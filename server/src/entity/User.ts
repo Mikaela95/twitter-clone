@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 // @ObjectType decorator - marks the class as the type known from graphQL SDL
 
@@ -7,15 +7,17 @@ import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @ObjectType()
 @Entity()
-export class User {
-
+export class User extends BaseEntity {
+    
+    @Field()
     @PrimaryGeneratedColumn()
-    id!: number;
+    id: number;
 
     @Field()
-    @Column({ type: "text", unique: true})
+    @Column({ type: "text", unique: true })
     username!: string;
 
+    @Field()
     @Column()
     password!: string;
 
