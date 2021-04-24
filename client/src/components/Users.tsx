@@ -14,6 +14,11 @@ const USERS_QUERY = gql`
 
 // need to add users to db first
 
-export default function Users() {
-  return <div></div>;
-}
+const Users = () => {
+  return (
+    <div>
+      <h1>something</h1>
+    </div>);
+};
+
+export { Users };
