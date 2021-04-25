@@ -3,7 +3,6 @@ import { createConnection } from "typeorm";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { HelloWorldResolver } from "./resolvers/HelloWorld";
 import { UserResolver } from "./resolvers/UserResolver";
 
 
