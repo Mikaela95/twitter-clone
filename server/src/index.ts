@@ -4,6 +4,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers/UserResolver";
+import cors from 'cors';
 
 
 (async () => {
@@ -18,9 +19,14 @@ import { UserResolver } from "./resolvers/UserResolver";
         context: ({ req, res }) => ({ req, res }),
     });
 
+    app.use(cors({
+        origin: "http://localhost:3000",
+        credentials: true
+    }))
+
     apolloServer.applyMiddleware({ app, cors: false });
 
-    app.listen(4000, () => {
-        console.log("express server started");
+    app.listen({ port: 4000}, () => {
+        console.log("express server started on localhost:4000");
     });
 })();
