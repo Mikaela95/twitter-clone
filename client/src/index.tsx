@@ -7,6 +7,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Instance of the apollo client
 const client = new ApolloClient({

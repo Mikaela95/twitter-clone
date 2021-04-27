@@ -1,15 +1,11 @@
 import React from "react";
 import { Users } from "./components/Users";
-
-// Instance of the apollo client
-/* const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: "http://localhost:4000/graphql"
-}); */
+import Button from 'react-bootstrap/Button';
 
 function App() {
   return (
     <div>
+      <Button>Test</Button>
       <Users />
     </div>
   );
