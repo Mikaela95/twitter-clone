@@ -1,8 +1,8 @@
-import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver, UseMiddleware } from "type-graphql";
 import { User } from "../entity/User";
 import bcrypt from "bcrypt";
-import { sign } from "jsonwebtoken";
 import { context } from "../types.ts/context";
+import { createAccessToken, createRefreshToken } from "../auth"
 
 // @Resolver is a decorator - the class you define after this will behave as a controller
 
@@ -31,6 +31,13 @@ export class UserResolver {
     return User.find()
   }
 
+  // Testing authentication and access
+  @Query(() => String)
+  @UseMiddleware()
+  bye() {
+    return "bye";
+  }
+
   // Create a user
   @Mutation(() => User)
   async createUser(@Arg("options") options: UsernamePasswordInput) {
@@ -49,10 +56,10 @@ export class UserResolver {
 
     // To-do: check that the password matches
 
-    res.cookie('rick', sign({ userId: user.id }, 'oiueowjlscfewg', { expiresIn: "7d" }), { httpOnly: true })
+    res.cookie('rick', createRefreshToken(user), { httpOnly: true })
 
     return {
-      accessToken: sign({ userId: user.id }, 'mtnvouahroiwjqkl', { expiresIn: "10h" })
+      accessToken: createAccessToken(user)
     };
   }
 
