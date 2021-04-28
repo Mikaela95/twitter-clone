@@ -3,21 +3,41 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import twitterBackground from "../images/twitter_background.png";
+import background from "../images/background_overlayed.png";
+import animatedLogo from "../images/animated_logo.gif";
+import Button from "react-bootstrap/Button";
 import "./Home.css";
-
-/* type IProps = {
-  test: number
-} */
 
 export const Home = () => {
   return (
     <Container fluid>
       <Row>
         <Col id="no-gutter">
-          <Image id="twitter-background" src={twitterBackground} fluid />
+          <div id="twitter-background">
+            <Image src={background} fluid />
+          </div>
         </Col>
-        <Col>2 of 2</Col>
+        <Col>
+          <div id="greeting">
+            <Row>
+              <Image id="bird" src={animatedLogo} alt="chirping bird" />
+            </Row>
+            <Row>
+              <h1 id="heading">Happening now</h1>
+            </Row>
+            <Row>
+              <h3 id="heading2">Join Twitter today.</h3>
+            </Row>
+            <Row>
+              <Button variant="primary" block>
+                Sign up
+              </Button>
+              <Button variant="outline-primary" block>
+                Log in
+              </Button>
+            </Row>
+          </div>
+        </Col>
       </Row>
     </Container>
   );

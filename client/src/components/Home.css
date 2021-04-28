@@ -1,8 +1,33 @@
-#no-gutter{
+#no-gutter {
   padding-left: 0;
   padding-right: 0;
 }
 
-#twitter-background{
-  height: 100%;
+#twitter-background {
+  position: relative;
+  object-fit: cover;
+  height: 1000px;
+  width: 1300px;
+  overflow: hidden;
+} 
+
+#greeting {
+  margin-top: 30%;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+#bird {
+  height: 100px;
+  margin-bottom: 50px;
+}
+
+#heading{
+  font-family: 'Oswald', sans-serif;
+  font-size: 60px;
+  margin-bottom: 4rem;
+}
+
+#heading2{
+  margin-bottom: 2rem;
 }
