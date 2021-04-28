@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -29,12 +30,16 @@ export const Home = () => {
               <h3 id="heading2">Join Twitter today.</h3>
             </Row>
             <Row>
-              <Button variant="primary" block>
-                Sign up
-              </Button>
-              <Button variant="outline-primary" block>
-                Log in
-              </Button>
+              <Link to="/register">
+                <Button id="primary-button" variant="primary" block>
+                  Sign up
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button id="primary-button" variant="outline-primary" block>
+                  Log in
+                </Button>
+              </Link>
             </Row>
           </div>
         </Col>
