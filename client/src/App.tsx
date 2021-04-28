@@ -1,13 +1,18 @@
 import React from "react";
-import { Users } from "./components/Users";
-import Button from 'react-bootstrap/Button';
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <Button>Test</Button>
-      <Users />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" exact component={Register} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
