@@ -13,7 +13,7 @@ export const Home = () => {
         <Col>
           <SideNavigation />
         </Col>
-        <Col>
+        <Col xs={6}>
           <Post />
         </Col>
         <Col>

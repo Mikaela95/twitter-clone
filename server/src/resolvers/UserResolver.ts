@@ -55,6 +55,10 @@ export class UserResolver {
     }
 
     // To-do: check that the password matches
+    bcrypt.compare(options.password, user.password).then((res) => {
+      if (!res) throw new Error("invalid password");
+      if (res) console.log("correct password")
+    });
 
     res.cookie('rick', createRefreshToken(user), { httpOnly: true })
 
