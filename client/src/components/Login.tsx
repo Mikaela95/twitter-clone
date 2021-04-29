@@ -6,6 +6,7 @@ import blueBird from "../images/2021_twitter_logo_blue.png";
 import Image from "react-bootstrap/Image";
 import "./Login.css";
 import { useLoginMutation } from "../generated/graphql";
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -13,14 +14,21 @@ export const Login = () => {
 
   const [login] = useLoginMutation();
 
-  const handleSubmit = (e: any) => {
+  let history = useHistory();
+
+  // Can currently input wrong password and it'll return an access token
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    login({
+    let response = await login({
       variables: {
         username,
         password,
       },
     });
+    if (response) {
+      history.push("/home");
+    }
+    // Need an error message when unsuccessful
   };
 
   return (
