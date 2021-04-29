@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { LOAD_USERS } from "../GraphQL/Queries";
+import { LOAD_USERS } from "../graphql/queries";
 
 // useEffect will wait for this data to be recieved
 
