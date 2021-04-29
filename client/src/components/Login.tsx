@@ -5,13 +5,22 @@ import Container from "react-bootstrap/Container";
 import blueBird from "../images/2021_twitter_logo_blue.png";
 import Image from "react-bootstrap/Image";
 import "./Login.css";
+import { useLoginMutation } from "../generated/graphql";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [login] = useLoginMutation();
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    login({
+      variables: {
+        username,
+        password,
+      },
+    });
   };
 
   return (

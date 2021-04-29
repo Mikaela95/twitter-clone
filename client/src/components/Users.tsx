@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { LOAD_USERS } from "../graphql/queries";
+
 
 // useEffect will wait for this data to be recieved
 
 const Users = () => {
-  const { error, loading, data } = useQuery(LOAD_USERS);
+  /* const { error, loading, data } = useQuery(LOAD_USERS);
 
   // Run once -> wait for data to change before rerunning
   useEffect(() => {
     console.log(data);
-  }, [data]);
+  }, [data]); */
 
   return (
     <div>
