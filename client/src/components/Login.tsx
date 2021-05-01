@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import { setAccessToken } from "../accessToken";
 
-
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +29,8 @@ export const Login = () => {
         },
       });
       setValid(true);
-      setAccessToken(response.data!.loginUser.accessToken);
+      const value = response.data!.loginUser.accessToken;
+      setAccessToken(value);
       history.push("/home");
     } catch (e) {
       setValid(false);
