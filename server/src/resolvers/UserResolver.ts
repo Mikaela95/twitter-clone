@@ -54,16 +54,26 @@ export class UserResolver {
       throw new Error("Could not find user")
     }
 
-    // To-do: check that the password matches
-    bcrypt.compare(options.password, user.password).then((res) => {
-      if (!res) throw new Error("invalid password");
-      if (res) console.log("correct password")
-    });
+    // Check that the password matches - currently not working
+    /* bcrypt.compare(options.password, user.password)
+      .then((res) => {
+        if (res) { console.log("correct password") }
+      })
+      .catch((error) => {
+        console.log("Unable to validate users request", error)
+      }) */
+
+    const valid = await bcrypt.compare(options.password, user.password);
+
+    if (!valid) {
+      throw new Error("bad password");
+    }
 
     res.cookie('rick', createRefreshToken(user), { httpOnly: true })
 
     return {
-      accessToken: createAccessToken(user)
+      accessToken: createAccessToken(user),
+      user
     };
   }
 

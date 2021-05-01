@@ -18,6 +18,7 @@ import { createAccessToken } from "./auth";
     app.post("/refresh_token", async (req, res) => {
         // read in the cookie
         const token = req.cookies.rick
+
         // check that token is passed in
         if (!token) {
             return res.send({ ok: false, accessToken: '' })
@@ -29,6 +30,7 @@ import { createAccessToken } from "./auth";
             payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
         } catch (err) {
             console.log(err)
+            console.log("this is the catch part")
             return res.send({ ok: false, accessToken: '' })
         }
 

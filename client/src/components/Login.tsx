@@ -16,10 +16,22 @@ export const Login = () => {
 
   let history = useHistory();
 
-  // Can currently input wrong password and it'll return an access token
+  // Assign access token to validated user
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    let response = await login({
+    try {
+      await login({
+        variables: {
+          username,
+          password,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  /* let response = await login({
       variables: {
         username,
         password,
@@ -27,9 +39,8 @@ export const Login = () => {
     });
     if (response) {
       history.push("/home");
-    }
-    // Need an error message when unsuccessful
-  };
+    } */
+  // Need an error message when unsuccessful
 
   return (
     <div>
