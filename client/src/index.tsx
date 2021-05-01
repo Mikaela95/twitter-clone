@@ -5,11 +5,18 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { getAccessToken } from "./accessToken";
+
+const token = getAccessToken();
 
 // Instance of the apollo client
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: "http://localhost:4000/graphql",
+  credentials: "include",
+  headers: {
+    authorization: token ? `Bearer ${token}` : "",
+  },
 });
 
 ReactDOM.render(

@@ -8,6 +8,8 @@ import "./Login.css";
 import { useLoginMutation } from "../generated/graphql";
 import { useHistory } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
+import { setAccessToken } from "../accessToken";
+
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -18,17 +20,18 @@ export const Login = () => {
 
   let history = useHistory();
 
-  // Assign access token to validated user
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      await login({
+      let response = await login({
         variables: {
           username,
           password,
         },
       });
       setValid(true);
+      setAccessToken(response.data!.loginUser.accessToken);
+      history.push("/home");
     } catch (e) {
       setValid(false);
       console.error(e);
@@ -71,8 +74,14 @@ export const Login = () => {
           <Button id="primary-button" type="submit" variant="primary" block>
             Log in
           </Button>
-          <p>Forgot password?</p>
-          <p>Sign up for Twitter</p>
+          <div>
+            <Button variant="link" style={{ float: "left" }}>
+              Forgot password?
+            </Button>
+            <Button variant="link" style={{ float: "right" }}>
+              Sign up for Twitter
+            </Button>
+          </div>
         </Form>
       </Container>
     </div>

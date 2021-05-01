@@ -3,6 +3,7 @@ import { User } from "../entity/User";
 import bcrypt from "bcrypt";
 import { context } from "../types.ts/context";
 import { createAccessToken, createRefreshToken } from "../auth"
+import { verify } from "jsonwebtoken";
 
 // @Resolver is a decorator - the class you define after this will behave as a controller
 
@@ -10,6 +11,8 @@ import { createAccessToken, createRefreshToken } from "../auth"
 class LoginResponse {
   @Field()
   accessToken: string
+  @Field(() => User)
+  user: User
 }
 
 // Object that is passed in
@@ -29,6 +32,27 @@ export class UserResolver {
   @Query(() => [User])
   users() {
     return User.find()
+  }
+
+  // Get current user
+  @Query(() => User, {nullable: true})
+  currentUser(@Ctx() context: context) {
+    // check that the user is authorised - to do
+    const authorisation = context.req.headers["authorization"];
+
+    // currently no user logged in
+    if (!authorisation) {
+      return null;
+    }
+    try {
+      const token = authorisation.split(" ")[1];
+      const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
+      // fetch the user
+      return User.findOne(payload.userId)
+    } catch (err) {
+      console.log(err)
+    }
+    return null;
   }
 
   // Testing authentication and access
@@ -76,5 +100,11 @@ export class UserResolver {
       user
     };
   }
+
+  /* @Mutation(() => Logout)
+  async logoutUser(@Ctx() { res }: context) {
+    sendRefreshToken(res, "")
+    return true
+  } */
 
 }
