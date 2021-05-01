@@ -7,10 +7,12 @@ import Image from "react-bootstrap/Image";
 import "./Login.css";
 import { useLoginMutation } from "../generated/graphql";
 import { useHistory } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [valid, setValid] = useState(true);
 
   const [login] = useLoginMutation();
 
@@ -26,27 +28,24 @@ export const Login = () => {
           password,
         },
       });
+      setValid(true);
     } catch (e) {
+      setValid(false);
       console.error(e);
     }
   };
-
-  /* let response = await login({
-      variables: {
-        username,
-        password,
-      },
-    });
-    if (response) {
-      history.push("/home");
-    } */
-  // Need an error message when unsuccessful
 
   return (
     <div>
       <Container style={{ maxWidth: "24%", marginTop: "10rem" }}>
         <Image src={blueBird} style={{ width: "37px", marginBottom: "2rem" }} />
         <h1 id="heading">Log in to Twitter</h1>
+        {!valid && (
+          <Alert variant="danger">
+            The username and password you entered did not match our records.
+            Please double-check and try again.
+          </Alert>
+        )}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formGroupEmail">
             <Form.Label>Phone, email or username</Form.Label>
