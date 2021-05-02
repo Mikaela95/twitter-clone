@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Tweet } from "./Tweet";
 
 // @ObjectType decorator - marks the class as the type known from graphQL SDL
 
@@ -20,5 +21,8 @@ export class User extends BaseEntity {
     @Field()
     @Column()
     password!: string;
+
+    @OneToMany(() => Tweet, (tweet: Tweet) => tweet.author)
+    tweets: Tweet[];
 
 }

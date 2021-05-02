@@ -9,6 +9,7 @@ import profileImage from "../images/Mikaela_Verhoosel.jpg";
 // Able to send tweet and appear in feed - populate with dummy data that the user can comment, retweet and like
 
 export const Post = () => {
+  
   const { data } = useCurrentUserQuery();
 
   return (

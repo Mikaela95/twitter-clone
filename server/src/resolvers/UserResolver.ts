@@ -31,7 +31,7 @@ export class UserResolver {
   // Get all users
   @Query(() => [User])
   users() {
-    return User.find()
+    return User.find({relations: ["tweets"]})
   }
 
   // Get current user
@@ -53,13 +53,6 @@ export class UserResolver {
       console.log(err)
     }
     return null;
-  }
-
-  // Testing authentication and access
-  @Query(() => String)
-  @UseMiddleware()
-  bye() {
-    return "bye";
   }
 
   // Create a user

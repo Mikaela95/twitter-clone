@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import { verify } from "jsonwebtoken";
 import { User } from "./entity/User";
 import { createAccessToken } from "./auth";
+import { TweetResolver } from "./resolvers/TweetResolver";
 
 
 (async () => {
@@ -48,7 +49,7 @@ import { createAccessToken } from "./auth";
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver],
+            resolvers: [UserResolver, TweetResolver],
         }),
         context: ({ req, res }) => ({ req, res }),
     });
