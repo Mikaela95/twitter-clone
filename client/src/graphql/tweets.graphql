@@ -1,0 +1,10 @@
+query Tweet{
+  tweets {
+    id
+    content
+    user {
+      id
+      username
+    }
+  }
+}

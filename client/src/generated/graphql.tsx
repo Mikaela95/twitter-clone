@@ -40,7 +40,14 @@ export type Query = {
   __typename?: 'Query';
   users: Array<User>;
   currentUser?: Maybe<User>;
-  bye: Scalars['String'];
+  tweets: Array<Tweet>;
+};
+
+export type Tweet = {
+  __typename?: 'Tweet';
+  id: Scalars['Float'];
+  content: Scalars['String'];
+  user?: Maybe<User>;
 };
 
 export type User = {
@@ -82,6 +89,21 @@ export type LoginMutation = (
       & Pick<User, 'id' | 'username'>
     ) }
   ) }
+);
+
+export type TweetQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TweetQuery = (
+  { __typename?: 'Query' }
+  & { tweets: Array<(
+    { __typename?: 'Tweet' }
+    & Pick<Tweet, 'id' | 'content'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username'>
+    )> }
+  )> }
 );
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
@@ -169,6 +191,45 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const TweetDocument = gql`
+    query Tweet {
+  tweets {
+    id
+    content
+    user {
+      id
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useTweetQuery__
+ *
+ * To run a query within a React component, call `useTweetQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTweetQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTweetQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTweetQuery(baseOptions?: Apollo.QueryHookOptions<TweetQuery, TweetQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
+      }
+export function useTweetLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TweetQuery, TweetQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TweetQuery, TweetQueryVariables>(TweetDocument, options);
+        }
+export type TweetQueryHookResult = ReturnType<typeof useTweetQuery>;
+export type TweetLazyQueryHookResult = ReturnType<typeof useTweetLazyQuery>;
+export type TweetQueryResult = Apollo.QueryResult<TweetQuery, TweetQueryVariables>;
 export const UserDocument = gql`
     query User {
   users {
