@@ -15,7 +15,7 @@ export class Tweet extends BaseEntity {
   content: string;
 
   @Field(type => User, {nullable: true})
-  @ManyToOne(() => User, (author: User) => author.tweets)
-  @JoinColumn({name: 'user_id', referencedColumnName: 'id'})
-  author: User;
+  @ManyToOne(() => User, (user: User) => user.tweets)
+  // @JoinColumn({name: 'user_id', referencedColumnName: 'id'})
+  user: User;
 }

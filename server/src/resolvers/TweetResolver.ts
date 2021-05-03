@@ -4,6 +4,7 @@ import { context } from "../types.ts/context";
 import { createAccessToken, createRefreshToken } from "../auth"
 import { verify } from "jsonwebtoken";
 import { Tweet } from "../entity/Tweet";
+import { User } from "../entity/User"
 import { UserResolver } from "./UserResolver";
 
 
@@ -24,7 +25,7 @@ export class TweetResolver {
   // Get all tweets
   @Query(() => [Tweet])
   tweets() {
-    return Tweet.find()
+    return Tweet.find({relations: ["user"]})
   }
 
   // Create a tweet

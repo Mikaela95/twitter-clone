@@ -22,7 +22,10 @@ export class User extends BaseEntity {
     @Column()
     password!: string;
 
-    @OneToMany(() => Tweet, (tweet: Tweet) => tweet.author)
+    @OneToMany(() => Tweet, (tweet: Tweet) => tweet.user, {
+        cascade: true
+    })
+
     tweets: Tweet[];
 
 }
