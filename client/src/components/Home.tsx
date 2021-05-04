@@ -37,19 +37,25 @@ export const Home = () => {
             <p>The user is not currently logged in</p>
           )}
           <Post />
-          <CardColumns style={{marginTop: "1rem"}}>
-            {dataT.tweets.map((tweet: any) => (
-              <Card className="categoryCard" key={tweet._id}>
-                <Card.Body style={{ color: "black" }}>
-                  <Card.Title>Some title</Card.Title>
-                  <Card.Text>{tweet.content}</Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                  <small className="text-muted">Last updated 3 mins ago</small>
-                </Card.Footer>
-              </Card>
-            ))}
-          </CardColumns>
+          {data && data.currentUser ? (
+            <CardColumns id="cardColumns" style={{ marginTop: "1rem" }}>
+              {dataT.tweets.map((tweet: any) => (
+                <Card className="categoryCard" key={tweet._id}>
+                  <Card.Body style={{ color: "black" }}>
+                    <Card.Title>Some title</Card.Title>
+                    <Card.Text>{tweet.content}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted">
+                      Last updated 3 mins ago
+                    </small>
+                  </Card.Footer>
+                </Card>
+              ))}
+            </CardColumns>
+          ) : (
+            <></>
+          )}
         </Col>
         <Col>
           <Search />

@@ -1,4 +1,4 @@
-query Tweet{
+query Tweet {
   tweets {
     id
     content
@@ -6,5 +6,11 @@ query Tweet{
       id
       username
     }
+  }
+}
+
+mutation CreateTweet($content: String!) {
+  createTweet(options: { content: $content }){
+    content
   }
 }

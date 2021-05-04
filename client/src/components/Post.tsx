@@ -2,15 +2,37 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useCurrentUserQuery } from "../generated/graphql";
+import {
+  useCreateTweetMutation,
+  useCurrentUserQuery,
+} from "../generated/graphql";
 import Image from "react-bootstrap/Image";
 import profileImage from "../images/Mikaela_Verhoosel.jpg";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 // Able to send tweet and appear in feed - populate with dummy data that the user can comment, retweet and like
 
 export const Post = () => {
-  
+  const [content, setContent] = useState("");
+
   const { data } = useCurrentUserQuery();
+  const [createTweet] = useCreateTweetMutation();
+
+  // let history = useHistory();
+
+  const handleSubmit = async (e: any) => {
+    console.log("button clicked");
+    e.preventDefault();
+    try {
+      let response = await createTweet({
+        variables: { content },
+      });
+      // history.push("/home")
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Card>
@@ -24,14 +46,20 @@ export const Post = () => {
           />
         </Card.Title>
         <Card.Text>
-          <Form.Control
-            id="tweet-input"
-            placeholder="What's happening?"
-          />
+          <Form onSubmit={handleSubmit}>
+            <Form.Control
+              id="tweet-input"
+              value={content}
+              placeholder="What's happening?"
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+            />
+            <Button variant="primary" type="submit">
+              Tweet
+            </Button>
+          </Form>
         </Card.Text>
-        <Button variant="primary" type="submit">
-          Tweet
-        </Button>
       </Card.Body>
     </Card>
   );

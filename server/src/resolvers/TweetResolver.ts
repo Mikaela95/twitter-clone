@@ -1,4 +1,4 @@
-import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver, UseMiddleware } from "type-graphql";
+import { Arg, Args, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver, UseMiddleware } from "type-graphql";
 import bcrypt from "bcrypt";
 import { context } from "../types.ts/context";
 import { createAccessToken, createRefreshToken } from "../auth"
@@ -15,23 +15,34 @@ class TweetInput {
   @Field()
   content: string
 
-  @Field()
-  author: string
-
 }
 
 @Resolver()
 export class TweetResolver {
+  constructor(
+    private userResolver: UserResolver,
+  ) { }
+
+  // Broke :( 
+  @Query(() => [User])
+  async test() {
+    return this.userResolver.users();
+  }
+
   // Get all tweets
   @Query(() => [Tweet])
   tweets() {
-    return Tweet.find({relations: ["user"]})
+    return Tweet.find({ relations: ["user"] })
+
   }
 
+  // Get all tweets associated with a user
+
+
+
   // Create a tweet
-  /* @Mutation(() => Tweet)
-  async createTweet(root, {id}){
-    // const currentUser = UserResolver.currentUser
-    // @Arg("options") options: TweetInput
-  } */
+  @Mutation(() => Tweet)
+  async createTweet(@Arg("options") options: TweetInput) {
+    return Tweet.create({ content: options.content}).save();
+  }
 }
