@@ -19,16 +19,14 @@ export const Post = () => {
   const { data } = useCurrentUserQuery();
   const [createTweet] = useCreateTweetMutation();
 
-  // let history = useHistory();
-
   const handleSubmit = async (e: any) => {
     console.log("button clicked");
+    console.log("this is the data from user: ", data);
     e.preventDefault();
     try {
-      let response = await createTweet({
+      await createTweet({
         variables: { content },
       });
-      // history.push("/home")
     } catch (e) {
       console.log(e);
     }

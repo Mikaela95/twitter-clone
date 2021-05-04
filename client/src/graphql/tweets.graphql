@@ -10,7 +10,15 @@ query Tweet {
 }
 
 mutation CreateTweet($content: String!) {
-  createTweet(options: { content: $content }){
+  createTweet(options: { content: $content }) {
     content
   }
+}
+
+mutation UpdateTweet($id: Int!, $contentUpdate: String!) {
+  updateTweet(id: $id, contentUpdate: { content: $contentUpdate })
+}
+
+mutation DeleteTweet($id: Int!) {
+  deleteTweet(id: $id)
 }

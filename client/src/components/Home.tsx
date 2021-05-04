@@ -8,7 +8,13 @@ import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useCurrentUserQuery, useTweetQuery } from "../generated/graphql";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import {
+  useCurrentUserQuery,
+  useDeleteTweetMutation,
+  useTweetQuery,
+} from "../generated/graphql";
 import Image from "react-bootstrap/Image";
 import profileImage from "../images/Mikaela_Verhoosel.jpg";
 import "./Home.css";
@@ -17,10 +23,16 @@ export const Home = () => {
   // Need to get user that has just logged in - can use the authentication token
   const { loading, error, data } = useCurrentUserQuery();
   const { loading: loadingT, error: errorT, data: dataT } = useTweetQuery();
+  const deleteTweet = useDeleteTweetMutation();
 
   if (loading) return <Loading />;
   if (error) return <p>ERROR: {error.message}</p>;
   if (dataT === undefined) return <p>ERROR</p>;
+
+  const handleDelete = async (e: any) => {
+    e.preventDefault();
+    console.log("delete button pressed");
+  };
 
   return (
     <Container style={{ marginTop: "50px" }}>
@@ -38,7 +50,24 @@ export const Home = () => {
           )}
           <Post />
           {data && data.currentUser ? (
-            dataT.tweets.map((tweet: any) => <p>{tweet.id}</p>)
+            <CardColumns id="cardColumns" style={{ marginTop: "1rem" }}>
+              {dataT.tweets.map((tweet: any) => (
+                <Form onSubmit={handleDelete}>
+                  <Card className="categoryCard" key={tweet._id}>
+                    <Card.Body style={{ color: "black" }}>
+                      <Card.Title>Some title</Card.Title>
+                      <Card.Text>{tweet.content}</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <Button type="submit">Delete</Button>
+                      <small className="text-muted">
+                        Last updated 3 mins ago
+                      </small>
+                    </Card.Footer>
+                  </Card>
+                </Form>
+              ))}
+            </CardColumns>
           ) : (
             <>something else</>
           )}
