@@ -1,4 +1,4 @@
-import { Arg, Args, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver, UseMiddleware } from "type-graphql";
+import { Arg, Args, Ctx, Field, InputType, Int, Mutation, ObjectType, Query, Resolver, UseMiddleware } from "type-graphql";
 import bcrypt from "bcrypt";
 import { context } from "../types.ts/context";
 import { createAccessToken, createRefreshToken } from "../auth"
@@ -6,6 +6,7 @@ import { verify } from "jsonwebtoken";
 import { Tweet } from "../entity/Tweet";
 import { User } from "../entity/User"
 import { UserResolver } from "./UserResolver";
+import { response } from "express";
 
 
 // Object that is passed in
@@ -17,32 +18,38 @@ class TweetInput {
 
 }
 
+/* @ObjectType()
+class TweetResponse {
+  @Field()
+  content: string
+} */
+
 @Resolver()
 export class TweetResolver {
-  constructor(
-    private userResolver: UserResolver,
-  ) { }
-
-  // Broke :( 
-  @Query(() => [User])
-  async test() {
-    return this.userResolver.users();
-  }
-
   // Get all tweets
   @Query(() => [Tweet])
   tweets() {
     return Tweet.find({ relations: ["user"] })
-
   }
 
-  // Get all tweets associated with a user
-
-
-
-  // Create a tweet
+  // CRUD Operations
+  // Create 
   @Mutation(() => Tweet)
   async createTweet(@Arg("options") options: TweetInput) {
-    return Tweet.create({ content: options.content}).save();
+    return Tweet.create({ content: options.content }).save();
   }
+
+  // Update 
+  @Mutation(() => Boolean)
+  async updateTweet(@Arg("id", () => Int) id: number, @Arg("contentUpdate", () => TweetInput) contentUpdate: TweetInput) {
+    await Tweet.update(id, contentUpdate);
+    return true;
+  }
+
+  // Delete
+  @Mutation(() => Boolean)
+  async deleteTweet(@Arg("id", () => Int) id: number){
+    await Tweet.delete(id);
+    return true;
+  } 
 }

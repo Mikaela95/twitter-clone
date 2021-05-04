@@ -10,9 +10,9 @@ export class Tweet extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @Field(type => String, {nullable: true})
   @Column()
-  content: string;
+  content!: string;
 
   @Field(type => User, {nullable: true})
   @ManyToOne(() => User, (user: User) => user.tweets)
