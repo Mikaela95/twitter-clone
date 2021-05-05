@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { context } from "../types.ts/context";
 import { createAccessToken, createRefreshToken } from "../auth"
 import { verify } from "jsonwebtoken";
+import { refreshToken } from "../refreshToken"
 
 // @Resolver is a decorator - the class you define after this will behave as a controller
 
@@ -31,11 +32,11 @@ export class UserResolver {
   // Get all users
   @Query(() => [User])
   users() {
-    return User.find({relations: ["tweets"]})
+    return User.find({ relations: ["tweets"] })
   }
 
   // Get current user
-  @Query(() => User, {nullable: true})
+  @Query(() => User, { nullable: true })
   currentUser(@Ctx() context: context) {
     // check that the user is authorised - to do
     const authorisation = context.req.headers["authorization"];
@@ -86,7 +87,8 @@ export class UserResolver {
       throw new Error("bad password");
     }
 
-    res.cookie('rick', createRefreshToken(user), { httpOnly: true })
+    // res.cookie('rick', createRefreshToken(user), { httpOnly: true })
+    refreshToken(res, createRefreshToken(user));
 
     return {
       accessToken: createAccessToken(user),

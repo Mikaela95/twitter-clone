@@ -10,11 +10,15 @@ import { response } from "express";
 
 
 // Object that is passed in
-@InputType()
+
+@InputType({ description: "New tweet associated with user" })
 class TweetInput {
 
   @Field()
   content: string
+
+  /* @Field(() => User)
+  user: User */
 
 }
 
@@ -22,6 +26,9 @@ class TweetInput {
 class TweetResponse {
   @Field()
   content: string
+
+  @Field(() => User)
+  user: User
 } */
 
 @Resolver()
@@ -36,8 +43,14 @@ export class TweetResolver {
   // Create 
   @Mutation(() => Tweet)
   async createTweet(@Arg("options") options: TweetInput) {
-    return Tweet.create({ content: options.content }).save();
+    return Tweet.create({ content: options.content}).save();
   }
+
+  /* @Mutation(() => Tweet) - not sure how to fix
+  async createTweet(@Arg('content') content: string, @Arg('user', () => User) user: User) {
+    return Tweet.create({ content, user })
+  } */
+
 
   // Update 
   @Mutation(() => Boolean)
@@ -48,8 +61,8 @@ export class TweetResolver {
 
   // Delete
   @Mutation(() => Boolean)
-  async deleteTweet(@Arg("id", () => Int) id: number){
+  async deleteTweet(@Arg("id", () => Int) id: number) {
     await Tweet.delete(id);
     return true;
-  } 
+  }
 }

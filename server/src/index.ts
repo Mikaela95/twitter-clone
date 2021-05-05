@@ -11,11 +11,18 @@ import { verify } from "jsonwebtoken";
 import { User } from "./entity/User";
 import { createAccessToken } from "./auth";
 import { TweetResolver } from "./resolvers/TweetResolver";
+import { refreshToken } from "./refreshToken";
 
 
 (async () => {
     const app = express();
+    app.use(cors({
+        origin: "http://localhost:3000",
+        credentials: true
+    }))
     app.use(cookieParser());
+
+    // When the user refreshes
     app.post("/refresh_token", async (req, res) => {
         // read in the cookie
         const token = req.cookies.rick
@@ -28,6 +35,7 @@ import { TweetResolver } from "./resolvers/TweetResolver";
         // token hasnt expired and is valid
         let payload: any = null;
         try {
+            // verify from jwt and token hasnt expired
             payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
         } catch (err) {
             console.log(err)
@@ -41,6 +49,8 @@ import { TweetResolver } from "./resolvers/TweetResolver";
         if (!user) {
             return res.send({ ok: false, accessToken: '' })
         }
+
+        refreshToken(res, createAccessToken(user))
 
         return res.send({ ok: true, accessToken: createAccessToken(user) })
     })

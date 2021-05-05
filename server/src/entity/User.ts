@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
 import { Tweet } from "./Tweet";
 
@@ -7,6 +7,7 @@ import { Tweet } from "./Tweet";
 // @Field decorator - declare which properties should be mapped to the GraphQL fields
 
 @ObjectType()
+/* @InputType() */
 @Entity()
 export class User extends BaseEntity {
 
