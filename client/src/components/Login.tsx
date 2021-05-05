@@ -29,9 +29,32 @@ export const Login = () => {
         },
       });
       setValid(true);
-      const value = response.data!.loginUser.accessToken;
-      setAccessToken(value);
-      history.push("/home");
+
+      // if it exists - this returns the access token
+      if (response && response.data) {
+        let test = response.data.loginUser.accessToken
+        console.log(test);
+      }
+
+      // Hacky
+      if (response && response.data) {
+        localStorage.setItem("accessToken", response.data.loginUser.accessToken)
+        let x = localStorage.getItem("accessToken")
+        // setAccessToken(x!)
+        history.push("/home");
+      }
+
+      /* const value = response.data!.loginUser.accessToken;
+      console.log("this is the value", value);
+
+      const test2 = localStorage.setItem("jwt", value);
+      console.log("set access token in local storage", test2);
+
+      // currently returns undefined
+      const test = setAccessToken(value);
+      console.log("after setting access token", test); */
+
+      // history.push("/home");
     } catch (e) {
       setValid(false);
       console.error(e);

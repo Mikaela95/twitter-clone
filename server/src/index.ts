@@ -9,23 +9,57 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { verify } from "jsonwebtoken";
 import { User } from "./entity/User";
-import { createAccessToken } from "./auth";
+import { createAccessToken, createRefreshToken } from "./auth";
 import { TweetResolver } from "./resolvers/TweetResolver";
 import { refreshToken } from "./refreshToken";
 
 
 (async () => {
     const app = express();
+
     app.use(cors({
         origin: "http://localhost:3000",
         credentials: true
     }))
+
     app.use(cookieParser());
 
     // When the user refreshes
     app.post("/refresh_token", async (req, res) => {
-        // read in the cookie
+        // unable to send from frontend - returning null
+        console.log(req.cookies)
         const token = req.cookies.rick
+        console.log(token)
+        
+        if (!token) {
+            console.log("token invalid")
+            return res.send({ ok: false, accessToken: '' })
+            
+        }
+
+        let payload: any = null;
+        try {
+            // verify from jwt and token hasnt expired
+            payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
+        } catch (err) {
+            console.log(err)
+            console.log("this is the catch part")
+            return res.send({ ok: false, accessToken: '' })
+        }
+
+        const user = await User.findOne({ id: payload.userId })
+
+        if (!user) {
+            console.log("not a user")
+            return res.send({ ok: false, accessToken: '' })
+        }
+
+        refreshToken(res, createRefreshToken(user))
+
+        return res.send({ ok: true, accessToken: createAccessToken(user) })
+        // read in the cookie
+        /* 
+        console.log("this should be a token", token);
 
         // check that token is passed in
         if (!token) {
@@ -52,7 +86,7 @@ import { refreshToken } from "./refreshToken";
 
         refreshToken(res, createAccessToken(user))
 
-        return res.send({ ok: true, accessToken: createAccessToken(user) })
+        return res.send({ ok: true, accessToken: createAccessToken(user) }) */
     })
 
     await createConnection();

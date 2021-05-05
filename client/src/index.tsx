@@ -1,39 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import {
+  ApolloProvider,
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
   ApolloLink,
+  HttpLink,
 } from "@apollo/client";
-import reportWebVitals from "./reportWebVitals";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { getAccessToken } from "./accessToken";
 
-
-const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
-});
+const httpLink = new HttpLink({ uri: "http://localhost:4000/graphql" });
 
 const authLink = new ApolloLink((operation, forward) => {
-  // get the authentication token from local storage if it exists
-  const token = getAccessToken();
-  // return the headers to the context so httpLink can read them
+  // Retrieve the authorization token from local storage.
+  const token = localStorage.getItem("accessToken");
+  // const token = getAccessToken();
+
+  // Use the setContext method to set the HTTP headers.
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : "",
     },
   });
+  // Call the next link in the middleware chain.
   return forward(operation);
 });
 
-// Instance of the apollo client
 const client = new ApolloClient({
+  link: authLink.concat(httpLink), // Chain it with the HttpLink
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink),
 });
 
 ReactDOM.render(

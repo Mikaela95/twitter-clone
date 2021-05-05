@@ -84,11 +84,14 @@ export class UserResolver {
     const valid = await bcrypt.compare(options.password, user.password);
 
     if (!valid) {
-      throw new Error("bad password");
+      throw new Error("incorrect password");
     }
 
-    // res.cookie('rick', createRefreshToken(user), { httpOnly: true })
+    // creates a new token - refresh token will also refresh this one
+    //res.cookie('rick', createRefreshToken(user), { httpOnly: true })
     refreshToken(res, createRefreshToken(user));
+    // Below works
+    // console.log(createRefreshToken(user))
 
     return {
       accessToken: createAccessToken(user),

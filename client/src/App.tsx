@@ -21,14 +21,14 @@ function App() {
     }).then(async (res) => {
       const data = await res.json();
       setAccessToken(data);
-      console.log(data);
+      console.log("this is the info coming back", data);
       setLoading(false);
     });
   }, []);
 
   if (loading) {
     return <p>spin spin spinning...</p>;
-  }
+  } 
 
   return (
     <div>
