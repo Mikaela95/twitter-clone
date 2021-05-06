@@ -2734,7 +2734,7 @@
     "@types/node" "*"
     "form-data" "^3.0.0"
 
-"@types/node@*", "@types/node@^12.0.0", "@types/node@^12.7.1", "@types/node@>=6":
+"@types/node@*", "@types/node@^12.0.0", "@types/node@^12.7.1":
   "integrity" "sha512-TxCmnSSppKBBOzYzPR2BR25YlX5Oay8z2XGwFBInuA/Co0V9xJhLlW4kjbxKtgeNo3NOMbQP1A5Rc03y+XecPw=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-12.20.10.tgz"
   "version" "12.20.10"
@@ -2786,6 +2786,13 @@
   "version" "5.1.13"
   dependencies:
     "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react-sticky-el@^1.0.2":
+  "integrity" "sha512-LjtfYEAKylFdTXMdoOnt2qVLf6BgrudNPeMxYu6rIqSEjN2eRE3yQkWvaodiYjMH474DQi04kwjt4SD3bdv5Bw=="
+  "resolved" "https://registry.npmjs.org/@types/react-sticky-el/-/react-sticky-el-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
     "@types/react" "*"
 
 "@types/react-transition-group@^4.4.1":
@@ -3152,14 +3159,6 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@wry/context@^0.4.0":
-  "integrity" "sha512-LrKVLove/zw6h2Md/KZyWxIkFM6AoyKp71OqpH9Hiip1csjPVoD3tPxlbQUNxEnHENks3UGgNpSBCAfq9KWuag=="
-  "resolved" "https://registry.npmjs.org/@wry/context/-/context-0.4.4.tgz"
-  "version" "0.4.4"
-  dependencies:
-    "@types/node" ">=6"
-    "tslib" "^1.9.3"
-
 "@wry/context@^0.6.0":
   "integrity" "sha512-sAgendOXR8dM7stJw3FusRxFHF/ZinU0lffsA2YTyyIOfic86JX02qlPqPVqJNZJPAxFt+2EE8bvq6ZlS0Kf+Q=="
   "resolved" "https://registry.npmjs.org/@wry/context/-/context-0.6.0.tgz"
@@ -3414,54 +3413,6 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"apollo-boost@^0.4.9":
-  "integrity" "sha512-05y5BKcDaa8w47f8d81UVwKqrAjn8uKLv6QM9fNdldoNzQ+rnOHgFlnrySUZRz9QIT3vPftQkEz2UEASp1Mi5g=="
-  "resolved" "https://registry.npmjs.org/apollo-boost/-/apollo-boost-0.4.9.tgz"
-  "version" "0.4.9"
-  dependencies:
-    "apollo-cache" "^1.3.5"
-    "apollo-cache-inmemory" "^1.6.6"
-    "apollo-client" "^2.6.10"
-    "apollo-link" "^1.0.6"
-    "apollo-link-error" "^1.0.3"
-    "apollo-link-http" "^1.3.1"
-    "graphql-tag" "^2.4.2"
-    "ts-invariant" "^0.4.0"
-    "tslib" "^1.10.0"
-
-"apollo-cache-inmemory@^1.6.6":
-  "integrity" "sha512-L8pToTW/+Xru2FFAhkZ1OA9q4V4nuvfoPecBM34DecAugUZEBhI2Hmpgnzq2hTKZ60LAMrlqiASm0aqAY6F8/A=="
-  "resolved" "https://registry.npmjs.org/apollo-cache-inmemory/-/apollo-cache-inmemory-1.6.6.tgz"
-  "version" "1.6.6"
-  dependencies:
-    "apollo-cache" "^1.3.5"
-    "apollo-utilities" "^1.3.4"
-    "optimism" "^0.10.0"
-    "ts-invariant" "^0.4.0"
-    "tslib" "^1.10.0"
-
-"apollo-cache@^1.3.5", "apollo-cache@1.3.5":
-  "integrity" "sha512-1XoDy8kJnyWY/i/+gLTEbYLnoiVtS8y7ikBr/IfmML4Qb+CM7dEEbIUOjnY716WqmZ/UpXIxTfJsY7rMcqiCXA=="
-  "resolved" "https://registry.npmjs.org/apollo-cache/-/apollo-cache-1.3.5.tgz"
-  "version" "1.3.5"
-  dependencies:
-    "apollo-utilities" "^1.3.4"
-    "tslib" "^1.10.0"
-
-"apollo-client@^2.6.10":
-  "integrity" "sha512-jiPlMTN6/5CjZpJOkGeUV0mb4zxx33uXWdj/xQCfAMkuNAC3HN7CvYDyMHHEzmcQ5GV12LszWoQ/VlxET24CtA=="
-  "resolved" "https://registry.npmjs.org/apollo-client/-/apollo-client-2.6.10.tgz"
-  "version" "2.6.10"
-  dependencies:
-    "@types/zen-observable" "^0.8.0"
-    "apollo-cache" "1.3.5"
-    "apollo-link" "^1.0.0"
-    "apollo-utilities" "1.3.4"
-    "symbol-observable" "^1.0.2"
-    "ts-invariant" "^0.4.0"
-    "tslib" "^1.10.0"
-    "zen-observable" "^0.8.0"
-
 "apollo-codegen-core@^0.39.8":
   "integrity" "sha512-/SyIorVwcMkbwYtzQ2YXI+HJf07N/Q+CdnuH2P6szhKWfS2hB8w1NyGLIIeVGfCCgDixqzueio8G7I1NhoSMCg=="
   "resolved" "https://registry.npmjs.org/apollo-codegen-core/-/apollo-codegen-core-0.39.8.tgz"
@@ -3586,7 +3537,7 @@
     "apollo-link" "^1.2.14"
     "tslib" "^1.9.3"
 
-"apollo-link-error@^1.0.3", "apollo-link-error@^1.1.1":
+"apollo-link-error@^1.1.1":
   "integrity" "sha512-jAZOOahJU6bwSqb2ZyskEK1XdgUY9nkmeclCrW7Gddh1uasHVqmoYc4CKdb0/H0Y1J9lvaXKle2Wsw/Zx1AyUg=="
   "resolved" "https://registry.npmjs.org/apollo-link-error/-/apollo-link-error-1.1.13.tgz"
   "version" "1.1.13"
@@ -3604,7 +3555,7 @@
     "ts-invariant" "^0.4.0"
     "tslib" "^1.9.3"
 
-"apollo-link-http@^1.3.1", "apollo-link-http@^1.5.5":
+"apollo-link-http@^1.5.5":
   "integrity" "sha512-uWcqAotbwDEU/9+Dm9e1/clO7hTB2kQ/94JYcGouBVLjoKmTeJTUPQKcJGpPwUjZcSqgYicbFqQSoJIW0yrFvg=="
   "resolved" "https://registry.npmjs.org/apollo-link-http/-/apollo-link-http-1.5.17.tgz"
   "version" "1.5.17"
@@ -3613,7 +3564,7 @@
     "apollo-link-http-common" "^0.2.16"
     "tslib" "^1.9.3"
 
-"apollo-link@^1.0.0", "apollo-link@^1.0.6", "apollo-link@^1.2.14", "apollo-link@^1.2.3":
+"apollo-link@^1.2.14", "apollo-link@^1.2.3":
   "integrity" "sha512-p67CMEFP7kOG1JZ0ZkYZwRDa369w5PIjtMjvrQd/HnIV8FRsHRqLqK+oAZQnFa1DDdZtOtHTi+aMIW6EatC2jg=="
   "resolved" "https://registry.npmjs.org/apollo-link/-/apollo-link-1.2.14.tgz"
   "version" "1.2.14"
@@ -3643,7 +3594,7 @@
   "resolved" "https://registry.npmjs.org/apollo-server-errors/-/apollo-server-errors-2.5.0.tgz"
   "version" "2.5.0"
 
-"apollo-utilities@^1.3.0", "apollo-utilities@^1.3.4", "apollo-utilities@1.3.4":
+"apollo-utilities@^1.3.0":
   "integrity" "sha512-pk2hiWrCXMAy2fRPwEyhvka+mqwzeP60Jr1tRYi5xru+3ko94HI9o6lK0CT33/w4RDlxWchmdhDCrvdr+pHCig=="
   "resolved" "https://registry.npmjs.org/apollo-utilities/-/apollo-utilities-1.3.4.tgz"
   "version" "1.3.4"
@@ -6620,7 +6571,7 @@
   "resolved" "https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.2.0.tgz"
   "version" "4.2.0"
 
-"eslint-plugin-react@^7.20.3", "eslint-plugin-react@^7.21.5":
+"eslint-plugin-react@^7.19.0", "eslint-plugin-react@^7.20.3", "eslint-plugin-react@^7.21.5":
   "integrity" "sha512-p30tuX3VS+NWv9nQot9xIGAHBXR0+xJVaZriEsHoJrASGCJZDJ8JLNM0YqKqI0AKm6Uxaa1VUHoNEibxRCMQHA=="
   "resolved" "https://registry.npmjs.org/eslint-plugin-react/-/eslint-plugin-react-7.22.0.tgz"
   "version" "7.22.0"
@@ -7248,6 +7199,11 @@
   "resolved" "https://registry.npmjs.org/flatten/-/flatten-1.0.3.tgz"
   "version" "1.0.3"
 
+"flow-bin@^0.120.1":
+  "integrity" "sha512-KgE+d+rKzdXzhweYVJty1QIOOZTTbtnXZf+4SLnmArLvmdfeLreQOZpeLbtq5h79m7HhDzX/HkUkoyu/fmSC2A=="
+  "resolved" "https://registry.npmjs.org/flow-bin/-/flow-bin-0.120.1.tgz"
+  "version" "0.120.1"
+
 "flush-write-stream@^1.0.0":
   "integrity" "sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w=="
   "resolved" "https://registry.npmjs.org/flush-write-stream/-/flush-write-stream-1.1.1.tgz"
@@ -7715,7 +7671,7 @@
     "extract-files" "^9.0.0"
     "form-data" "^3.0.0"
 
-"graphql-tag@^2.0.0", "graphql-tag@^2.10.1", "graphql-tag@^2.11.0", "graphql-tag@^2.12.0", "graphql-tag@^2.4.2":
+"graphql-tag@^2.0.0", "graphql-tag@^2.10.1", "graphql-tag@^2.11.0", "graphql-tag@^2.12.0":
   "integrity" "sha512-5wJMjSvj30yzdciEuk9dPuUBUR56AqDi3xncoYQl1i42pGdSqOJrJsdb/rz5BDoy+qoGvQwABcBeF0xXY3TrKw=="
   "resolved" "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.12.3.tgz"
   "version" "2.12.3"
@@ -10890,13 +10846,6 @@
   dependencies:
     "is-wsl" "^1.1.0"
 
-"optimism@^0.10.0":
-  "integrity" "sha512-9A5pqGoQk49H6Vhjb9kPgAeeECfUDF6aIICbMDL23kDLStBn1MWk3YvcZ4xWF9CsSf6XEgvRLkXy4xof/56vVw=="
-  "resolved" "https://registry.npmjs.org/optimism/-/optimism-0.10.3.tgz"
-  "version" "0.10.3"
-  dependencies:
-    "@wry/context" "^0.4.0"
-
 "optimism@^0.15.0":
   "integrity" "sha512-KLKl3Kb7hH++s9ewRcBhmfpXgXF0xQ+JZ3xQFuPjnoT6ib2TDmYyVkKENmGxivsN2G3VRxpXuauCkB4GYOhtPw=="
   "resolved" "https://registry.npmjs.org/optimism/-/optimism-0.15.0.tgz"
@@ -12200,7 +12149,7 @@
     "react-is" "^16.3.2"
     "warning" "^4.0.0"
 
-"prop-types@^15.0.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@^15.0.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -12629,6 +12578,15 @@
     "workbox-webpack-plugin" "5.1.4"
   optionalDependencies:
     "fsevents" "^2.1.3"
+
+"react-sticky-el@^2.0.7":
+  "integrity" "sha512-pf38BaD+H4oOSkyRdV5PRulljbXy1pfX9rXA+Wdur07qARG2ebtl41dDrqEUc1EzriB5/iXWyfRP9GVFDmKVOg=="
+  "resolved" "https://registry.npmjs.org/react-sticky-el/-/react-sticky-el-2.0.7.tgz"
+  "version" "2.0.7"
+  dependencies:
+    "eslint-plugin-react" "^7.19.0"
+    "flow-bin" "^0.120.1"
+    "prop-types" ">=15.7.2"
 
 "react-transition-group@^4.4.1":
   "integrity" "sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw=="
@@ -14317,11 +14275,6 @@
   "version" "2.0.2"
   dependencies:
     "tslib" "^2.0.3"
-
-"symbol-observable@^1.0.2":
-  "integrity" "sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ=="
-  "resolved" "https://registry.npmjs.org/symbol-observable/-/symbol-observable-1.2.0.tgz"
-  "version" "1.2.0"
 
 "symbol-observable@^1.1.0":
   "integrity" "sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ=="

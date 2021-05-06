@@ -10,6 +10,8 @@ import Image from "react-bootstrap/Image";
 import profileImage from "../images/Mikaela_Verhoosel.jpg";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Sticky from "react-sticky-el";
+
 
 // Able to send tweet and appear in feed - populate with dummy data that the user can comment, retweet and like
 

@@ -19,8 +19,10 @@ import {
 import Image from "react-bootstrap/Image";
 import profileImage from "../images/Mikaela_Verhoosel.jpg";
 import { useHistory, Link } from "react-router-dom";
-
+import DropdownButton from "react-bootstrap/DropdownButton";
 import "./Home.css";
+import { Dropdown } from "react-bootstrap";
+
 
 export const Home = () => {
   // Need to get user that has just logged in - can use the authentication token
@@ -36,6 +38,8 @@ export const Home = () => {
   if (error) return <p>ERROR: {error.message}</p>;
   if (dataT === undefined) return <p>ERROR</p>;
 
+  const currentUser = data?.currentUser?.username as string | undefined;
+
   const handleDelete = (id: number) => {
     deleteTweet({
       variables: { id: id },
@@ -48,32 +52,41 @@ export const Home = () => {
         <Col>
           <SideNavigation />
         </Col>
+
         <Col xs={6}>
-          {data && data.currentUser ? (
-            <div>
-              <p>the current user is: {data.currentUser.username}</p>{" "}
-            </div>
-          ) : (
-            <p>The user is not currently logged in</p>
-          )}
           <Post />
           {data && data.currentUser ? (
             <CardColumns id="cardColumns" style={{ marginTop: "1rem" }}>
               {dataT.tweets.map((tweet: any) => (
                 <Form>
                   <Card className="categoryCard" key={tweet.id}>
+                    <Card.Header>
+                      @{currentUser}
+                      <Dropdown
+                        style={{ display: "inline", marginLeft: "24rem" }}
+                      >
+                        <Dropdown.Toggle
+                          variant="secondary"
+                          id="dropdown-basic"
+                        ></Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item href={`/edit/${tweet.id}`}>
+                            Edit
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            href="/home"
+                            onClick={() => handleDelete(tweet.id)}
+                          >
+                            Delete
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Card.Header>
                     <Card.Body style={{ color: "black" }}>
                       <Card.Title>Some title</Card.Title>
                       <Card.Text>{tweet.content}</Card.Text>
-                      {console.log("this is the returned tweet", tweet)}
                     </Card.Body>
                     <Card.Footer>
-                      <Button onClick={() => handleDelete(tweet.id)}>
-                        Delete
-                      </Button>
-                      <Link to={`/edit/${tweet.id}`}>
-                        <Button variant="warning">Edit</Button>
-                      </Link>
                       <small className="text-muted">
                         Last updated 3 mins ago
                       </small>
@@ -83,7 +96,7 @@ export const Home = () => {
               ))}
             </CardColumns>
           ) : (
-            <>something else</>
+            <p>user not available</p>
           )}
         </Col>
         <Col>
