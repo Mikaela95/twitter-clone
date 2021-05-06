@@ -5,6 +5,8 @@ import { context } from "../types.ts/context";
 import { createAccessToken, createRefreshToken } from "../auth"
 import { verify } from "jsonwebtoken";
 import { refreshToken } from "../refreshToken"
+import { response } from "express";
+import cookieParser from "cookie-parser";
 
 // @Resolver is a decorator - the class you define after this will behave as a controller
 
@@ -99,8 +101,10 @@ export class UserResolver {
     };
   }
 
-  /* @Mutation(() => Boolean)
-  async logoutUser(@Arg("currentUser", () => User) currentUser: User, @Ctx: context) => {
-  return true; */
+  @Mutation(() => Boolean)
+  async logoutUser(@Ctx() { res }: context) {
+    
+    return true
+  }
 
 }

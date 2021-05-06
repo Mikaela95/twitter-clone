@@ -14,3 +14,7 @@ mutation CreateUser($username: String!, $password: String!){
     password
   }
 }
+
+mutation Logout{
+  logoutUser
+}
