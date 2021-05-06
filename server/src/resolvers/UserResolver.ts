@@ -99,10 +99,8 @@ export class UserResolver {
     };
   }
 
-  /* @Mutation(() => Logout)
-  async logoutUser(@Ctx() { res }: context) {
-    sendRefreshToken(res, "")
-    return true
-  } */
+  /* @Mutation(() => Boolean)
+  async logoutUser(@Arg("currentUser", () => User) currentUser: User, @Ctx: context) => {
+  return true; */
 
 }
