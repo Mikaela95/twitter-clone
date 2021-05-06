@@ -69,6 +69,7 @@ export type Tweet = {
   user?: Maybe<User>;
 };
 
+/** New tweet associated with user */
 export type TweetInput = {
   content: Scalars['String'];
 };

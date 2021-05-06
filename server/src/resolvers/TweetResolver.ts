@@ -55,7 +55,7 @@ export class TweetResolver {
   // Update 
   @Mutation(() => Boolean)
   async updateTweet(@Arg("id", () => Int) id: number, @Arg("contentUpdate", () => TweetInput) contentUpdate: TweetInput) {
-    await Tweet.update(id, contentUpdate);
+    await Tweet.update(id, {content: contentUpdate.content});
     return true;
   }
 

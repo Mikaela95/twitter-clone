@@ -3,6 +3,7 @@ import { Welcome } from "./components/Welcome";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
+import { Edit } from "./components/Edit";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -39,6 +40,7 @@ function App() {
             <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" exact component={Register} />
+            <Route path="/edit/:id" exact component={Edit} />
           </Switch>
         </BrowserRouter>
       )}
