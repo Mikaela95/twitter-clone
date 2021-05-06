@@ -16,10 +16,6 @@ import {
   useTweetQuery,
   useUpdateTweetMutation,
 } from "../generated/graphql";
-import Image from "react-bootstrap/Image";
-import profileImage from "../images/Mikaela_Verhoosel.jpg";
-import { useHistory, Link } from "react-router-dom";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import "./Home.css";
 import { Dropdown } from "react-bootstrap";
 

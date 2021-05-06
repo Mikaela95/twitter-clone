@@ -8,11 +8,13 @@ import {
 } from "../generated/graphql";
 import Image from "react-bootstrap/Image";
 import profileImage from "../images/Mikaela_Verhoosel.jpg";
+import avatar from "../images/avatar.png";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Sticky from "react-sticky-el";
-
-
+import { Col, OverlayTrigger, Row } from "react-bootstrap";
+import "./Post.css";
+import Tooltip from "react-bootstrap/Tooltip";
 // Able to send tweet and appear in feed - populate with dummy data that the user can comment, retweet and like
 
 export const Post = () => {
@@ -34,30 +36,63 @@ export const Post = () => {
     }
   };
 
+  const renderTooltip = (props: any) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Media
+    </Tooltip>
+  );
+
   return (
     <Card>
       <Card.Header as="h5">Home</Card.Header>
       <Card.Body>
-        <Card.Title>
-          <Image
-            src={profileImage}
-            roundedCircle
-            style={{ width: "50px", height: "50px" }}
-          />
-        </Card.Title>
-        <Card.Text>
+        <Card.Text style={{ display: "inline" }}>
           <Form onSubmit={handleSubmit}>
-            <Form.Control
-              id="tweet-input"
-              value={content}
-              placeholder="What's happening?"
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            />
-            <Button variant="primary" type="submit">
-              Tweet
-            </Button>
+            <Row>
+              <Col sm={2} style={{ marginBottom: "20px" }}>
+                <Image
+                  src={avatar}
+                  roundedCircle
+                  style={{ width: "50px", height: "50px" }}
+                />
+              </Col>
+              <Col sm={10}>
+                <Form.Control
+                  id="tweet-input"
+                  value={content}
+                  placeholder="What's happening?"
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                  }}
+                />
+              </Col>
+              <Col>
+                <Button className="float-right" variant="primary" type="submit">
+                  Tweet
+                </Button>
+                <OverlayTrigger
+                  placement="bottom"
+                  delay={{ show: 250, hide: 0 }}
+                  overlay={renderTooltip}
+                >
+                  <Button id="post-icon" variant="outline-primary">
+                    <i className="bi bi-image float-right"></i>
+                  </Button>
+                </OverlayTrigger>
+                <Button id="post-icon" variant="outline-primary">
+                  <i className="bi bi-film"></i>
+                </Button>
+                <Button id="post-icon" variant="outline-primary">
+                  <i className="bi bi-bar-chart-line"></i>
+                </Button>
+                <Button id="post-icon" variant="outline-primary">
+                  <i className="bi bi-emoji-smile"></i>
+                </Button>
+                <Button id="post-icon" variant="outline-primary">
+                  <i className="bi bi-calendar"></i>
+                </Button>
+              </Col>
+            </Row>
           </Form>
         </Card.Text>
       </Card.Body>
