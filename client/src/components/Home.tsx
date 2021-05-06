@@ -3,7 +3,6 @@ import { SideNavigation } from "./SideNavigation";
 import { Search } from "./Search";
 import { Post } from "./Post";
 import { Loading } from "./Loading";
-import { ModalWindow } from "./ModalWindow";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
@@ -24,23 +23,21 @@ import "./Home.css";
 
 export const Home = () => {
   // Need to get user that has just logged in - can use the authentication token
-  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState("");
   const { loading, error, data } = useCurrentUserQuery();
   const { loading: loadingT, error: errorT, data: dataT } = useTweetQuery();
   const [
     deleteTweet,
     { loading: deleting, error: deleteError },
   ] = useDeleteTweetMutation();
-  
 
   if (loading) return <Loading />;
   if (error) return <p>ERROR: {error.message}</p>;
   if (dataT === undefined) return <p>ERROR</p>;
 
-  const handleDelete = () => {
-    if (deleting) return;
+  const handleDelete = (id: number) => {
     deleteTweet({
-      variables: { id: dataT.tweets[0].id },
+      variables: { id: id },
     });
   };
 
@@ -62,7 +59,7 @@ export const Home = () => {
           {data && data.currentUser ? (
             <CardColumns id="cardColumns" style={{ marginTop: "1rem" }}>
               {dataT.tweets.map((tweet: any) => (
-                <Form onSubmit={handleDelete}>
+                <Form>
                   <Card className="categoryCard" key={tweet.id}>
                     <Card.Body style={{ color: "black" }}>
                       <Card.Title>Some title</Card.Title>
@@ -70,7 +67,9 @@ export const Home = () => {
                       {console.log("this is the returned tweet", tweet)}
                     </Card.Body>
                     <Card.Footer>
-                      <Button type="submit">Delete</Button>
+                      <Button onClick={() => handleDelete(tweet.id)}>
+                        Delete
+                      </Button>
                       <Link to={`/edit/${tweet.id}`}>
                         <Button variant="warning">Edit</Button>
                       </Link>
