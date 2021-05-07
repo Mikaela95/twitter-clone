@@ -79,7 +79,6 @@ export const Home = () => {
                       </Dropdown>
                     </Card.Header>
                     <Card.Body style={{ color: "black" }}>
-                      <Card.Title>Some title</Card.Title>
                       <Card.Text>{tweet.content}</Card.Text>
                     </Card.Body>
                     <Card.Footer>

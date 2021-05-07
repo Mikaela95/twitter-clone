@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
+import { Container } from "react-bootstrap";
 
 interface IProps {
   match: any;
@@ -36,23 +37,28 @@ export const Edit = ({ match }: IProps) => {
   };
 
   return (
-    <Form onSubmit={handleEdit}>
-      <Form.Row style={{ margin: "20px -5px" }}>
-        <Col>
-          <Form.Control
-            placeholder="Tweet"
-            key={match.params.id}
-            name="projectedExpense"
-            value={content}
-            onChange={(e) => {
-              e.preventDefault();
-              setContent(e.target.value);
-            }}
-            required
-          />
-        </Col>
-        <Button type="submit">Submit</Button>
-      </Form.Row>
-    </Form>
+    <div>
+      <Container style={{ maxWidth: "24%", marginTop: "10rem" }}>
+        <h1 id="heading">Edit tweet</h1>
+        <Form onSubmit={handleEdit}>
+          <Form.Group controlId="formGroupEmail">
+            <Form.Control
+              placeholder="Tweet"
+              key={match.params.id}
+              name="projectedExpense"
+              value={content}
+              onChange={(e) => {
+                e.preventDefault();
+                setContent(e.target.value);
+              }}
+              required
+            />
+          </Form.Group>
+          <Button id="primary-button" type="submit" variant="primary" block>
+            Submit
+          </Button>
+        </Form>
+      </Container>
+    </div>
   );
 };
