@@ -31,7 +31,7 @@ This will run the application on port 3000
 *Future work - migrate PostgreSQL to an Amazon Relational Database Service (Amazon RDS) or DynamoDB*
 ## Motivation
 
-To build upon...
+To develop my skills building relational databases, and explore incorporating TypeGraphQL, Apollo-server/client and TypeORM.
 
 ## User Stories
 
