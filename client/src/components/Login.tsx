@@ -101,7 +101,7 @@ export const Login = () => {
             <Button variant="link" style={{ float: "left" }}>
               Forgot password?
             </Button>
-            <Button variant="link" style={{ float: "right" }}>
+            <Button variant="link" style={{ float: "right" }} onClick={() => {history.push("/register")}}>
               Sign up for Twitter
             </Button>
           </div>

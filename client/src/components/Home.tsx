@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SideNavigation } from "./SideNavigation";
 import { Search } from "./Search";
 import { Post } from "./Post";
@@ -21,14 +21,13 @@ import { Dropdown } from "react-bootstrap";
 
 
 export const Home = () => {
-  // Need to get user that has just logged in - can use the authentication token
-  const [value, setValue] = useState("");
   const { loading, error, data } = useCurrentUserQuery();
   const { loading: loadingT, error: errorT, data: dataT } = useTweetQuery();
   const [
     deleteTweet,
     { loading: deleting, error: deleteError },
   ] = useDeleteTweetMutation();
+
 
   if (loading) return <Loading />;
   if (error) return <p>ERROR: {error.message}</p>;

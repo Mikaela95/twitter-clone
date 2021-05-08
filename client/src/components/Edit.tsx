@@ -22,14 +22,12 @@ export const Edit = ({ match }: IProps) => {
   const handleEdit = async (e: any) => {
     e.preventDefault();
     try {
-      let response = await editTweet({
+      await editTweet({
         variables: {
           id: id,
           contentUpdate: content,
         },
       });
-      // console.log(response);
-      // Add refresh
       history.push("/home");
     } catch (e) {
       console.error(e);
